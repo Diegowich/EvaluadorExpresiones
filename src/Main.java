@@ -2,16 +2,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("*** Convertidor de expresion Infija a Postfija ***");
         Scanner sc = new Scanner(System.in);
-        VerificadorParentesis verificador = new VerificadorParentesis();
         System.out.print("Ingresa una expresion algebraica en notacion infija: ");
-        String expresion = sc.nextLine();
+        String expresionInfija = sc.nextLine();
 
-        while(!VerificadorParentesis.verificar(expresion)){
+        while(!VerificadorParentesis.verificar(expresionInfija)){
             System.out.print("La expresion no esta balanceada. Ingresa una expresion balanceada: ");
-            expresion = sc.nextLine();
+            expresionInfija = sc.nextLine();
         }
-        System.out.println("La expresion convertida a postfija es: " + InfijaAPostfija.conversionPostfija(expresion));
 
+        var expresionPostfija = InfijaAPostfija.conversionPostfija(expresionInfija);
+        var resultado = EvaluadorPostfijo.solucionarTermino(expresionPostfija);
+        System.out.printf("""
+                %nExpresion Infija = %s
+                Expresion Postfija = %s
+                Resultado de la expresion = %d
+                """,expresionInfija,expresionPostfija,resultado);
     }
 }
