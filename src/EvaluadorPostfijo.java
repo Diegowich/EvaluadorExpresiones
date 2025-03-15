@@ -20,7 +20,14 @@ public class EvaluadorPostfijo {
                         case '+' ->  resultado = operando1 + operando2;
                         case '-' ->  resultado = operando1 - operando2;             // Segun el tipo de operador que se ha encontrado el iterador se hara la operacion
                         case '*' -> resultado = operando1 * operando2;              // y el resultado se guardara en la variable " resultado "
-                        case '/' -> resultado = operando1 / operando2;
+                        case '/' -> {
+                            if(operando2 == 0){
+                                throw new ArithmeticException("No se puede dividir por 0");
+                            }
+                            else
+                                resultado = operando1 / operando2;
+                        }
+
                         default -> throw new IllegalArgumentException("Operador inválido: " + c); // Si se encuentra un operador diferente se envia un mensaje de error
                     }
                 }   pila.push(resultado);    // el resultado dentro de la variable resultado se añade a la pila
